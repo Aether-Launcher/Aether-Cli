@@ -6,36 +6,40 @@
   </a>
 </p>
 
-The `aether-cli` is the official developer toolkit for creating, building, and packaging **extensions** and **themes** for the [Aether Minecraft Launcher](https://github.com/Aether-Launcher/Aether). It lets developers scaffold new projects and package them securely into `.aex` (extension) or `.theme` (appearance pack) format.
+`aether` (alias: `aet`) is the official developer toolkit for creating, building, developing, and packaging **extensions** and **themes** for the [Aether Minecraft Launcher](https://github.com/Aether-Launcher/Aether). It lets developers scaffold new projects, hot-reload them into the local launcher, and package them securely into `.aex` (extension) or `.theme` (appearance pack) format.
 
 ---
 
 ## Installation
 
-Install the CLI with Go:
+Install the CLI with Go (this installs `aether`, the short alias `aet`, and `aether-cli`):
 
 ```bash
-go install github.com/Aether-Launcher/aether-cli@latest
+go install github.com/Aether-Launcher/aether-cli/...@latest
 ```
 
-The binary is installed as `aether-cli`. Make sure your Go bin directory is on `PATH` (`$(go env GOPATH)/bin` on macOS/Linux, `%USERPROFILE%\go\bin` on Windows), then open a new terminal and run:
+Make sure your Go bin directory is on `PATH` (`$(go env GOPATH)/bin` on macOS/Linux, `%USERPROFILE%\go\bin` on Windows), then open a new terminal and run:
 
 ```bash
-aether-cli help
+aether help
+# or using the short alias:
+aet help
 ```
 
 ---
 
 ## Commands
 
+You can run any command using either `aether`, `aet`, or `aether-cli`.
+
 ### `init` — Scaffold a new project
 
 ```bash
 # Scaffold a new extension
-aether-cli init <name> <id>
+aether init <name> <id>
 
 # Scaffold a new theme
-aether-cli init <name> <id> --theme
+aether init <name> <id> --theme
 ```
 
 | Flag | Alias | Description |
@@ -63,14 +67,27 @@ aether-cli init <name> <id> --theme
 
 ---
 
+### `dev` — Live extension hot-reloading
+
+```bash
+# Watch and hot-sync the current extension directory to Aether
+aether dev
+# or
+aet dev
+```
+
+Validates `manifest.json`, deploys the extension directly to your local Aether Launcher directory (`%APPDATA%\Aether\extensions\<id>` on Windows, `~/Library/Application Support/Aether/extensions/<id>` on macOS, `~/.local/share/Aether/extensions/<id>` on Linux), and continuously watches for file changes to keep the launcher in sync.
+
+---
+
 ### `validate` — Validate an extension or theme
 
 ```bash
 # Validate extension (reads manifest.json)
-aether-cli validate
+aether validate
 
 # Validate theme (reads package.json)
-aether-cli validate --theme
+aether validate --theme
 ```
 
 **Auto-detection:** if `manifest.json` is absent but `package.json` is present, the project is automatically treated as a theme.
@@ -89,10 +106,10 @@ aether-cli validate --theme
 
 ```bash
 # Build extension → <id>-<version>.aex
-aether-cli build
+aether build
 
 # Build theme → <id>-<version>.theme
-aether-cli build --theme
+aether build --theme
 ```
 
 **Auto-detection:** same logic as `validate` — detects project type automatically.
@@ -108,9 +125,9 @@ Runs validation first, then packages all project files into a zip-format archive
 ### `help` — Show help
 
 ```bash
-aether-cli help
-aether-cli --help
-aether-cli -h
+aether help
+# or
+aet help
 ```
 
 ---
@@ -118,22 +135,23 @@ aether-cli -h
 ## Quick Start — Extension
 
 ```bash
-aether-cli init my-extension com.example.myextension
+aet init my-extension com.example.myextension
 cd my-extension
 npm install   # installs @aethermc/sdk for TypeScript types
-aether-cli validate
-aether-cli build
+aet dev       # live test in local launcher
+aet validate
+aet build
 # → com.example.myextension-1.0.0.aex
 ```
 
 ## Quick Start — Theme
 
 ```bash
-aether-cli init my-theme com.example.mytheme --theme
+aet init my-theme com.example.mytheme --theme
 cd my-theme
 # Edit theme.css to customise colours, radii, spacing...
-aether-cli validate
-aether-cli build
+aet validate
+aet build
 # → com.example.mytheme-1.0.0.theme
 ```
 
@@ -162,11 +180,12 @@ Once built, submit your `.aex` file alongside an entry in `index.json` to the [A
 The CLI is written in Go and uses only the standard library to keep the binary small and dependency-free.
 
 ```bash
-# Build locally
-go build -o aether-cli.exe   # Windows
-go build -o aether-cli       # macOS / Linux
+# Build and install locally
+go install ./...
 
-./aether-cli help
+# Run either command
+aether help
+aet help
 ```
 
 ---
