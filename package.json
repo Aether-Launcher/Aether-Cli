@@ -1,0 +1,39 @@
+{
+  "name": "@aethermc/cli",
+  "version": "1.0.0",
+  "description": "Official CLI toolkit for Aether Minecraft Launcher extensions and themes",
+  "main": "bin/run.js",
+  "bin": {
+    "aether": "./bin/run.js",
+    "aet": "./bin/run.js",
+    "aether-cli": "./bin/run.js"
+  },
+  "files": [
+    "bin",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "postinstall": "node bin/install.js",
+    "test": "node bin/run.js help"
+  },
+  "keywords": [
+    "aether",
+    "minecraft",
+    "launcher",
+    "cli",
+    "extensions",
+    "themes",
+    "modding"
+  ],
+  "author": "Aether",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aether-Launcher/Aether-Cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Aether-Launcher/Aether-Cli/issues"
+  },
+  "homepage": "https://github.com/Aether-Launcher/Aether-Cli#readme"
+}

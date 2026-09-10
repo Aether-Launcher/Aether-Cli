@@ -12,7 +12,23 @@
 
 ## Installation
 
-Install the CLI with Go (this installs `aether`, the short alias `aet`, and `aether-cli`):
+### Via npm (Recommended — No Go required)
+
+You can run commands instantly without installing using `npx`:
+
+```bash
+npx @aethermc/cli init my-extension com.example.myext
+```
+
+Or install globally to get `aether`, `aet`, and `aether-cli` in your terminal:
+
+```bash
+npm install -g @aethermc/cli
+```
+
+### Via Go
+
+If you have Go installed, you can compile and install directly from source:
 
 ```bash
 go install github.com/Aether-Launcher/aether-cli/...@latest
