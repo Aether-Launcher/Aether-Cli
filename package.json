@@ -4,9 +4,9 @@
   "description": "Official CLI toolkit for Aether Minecraft Launcher extensions and themes",
   "main": "bin/run.js",
   "bin": {
-    "aether": "./bin/run.js",
-    "aet": "./bin/run.js",
-    "aether-cli": "./bin/run.js"
+    "aether": "bin/run.js",
+    "aet": "bin/run.js",
+    "aether-cli": "bin/run.js"
   },
   "files": [
     "bin",
