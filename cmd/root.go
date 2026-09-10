@@ -12,6 +12,7 @@ func PrintHelp() {
 	fmt.Println("  init        Scaffolds a new Aether extension or theme (--theme)")
 	fmt.Println("  validate    Validates the manifest.json of an extension or package.json of a theme")
 	fmt.Println("  build       Builds and packages the extension/theme (.aex / .theme)")
+	fmt.Println("  dev         Deploys extension to local Aether Launcher & watches for file changes")
 }
 
 func Execute(command string, args []string) error {
@@ -22,6 +23,8 @@ func Execute(command string, args []string) error {
 		return RunValidate(args)
 	case "build":
 		return RunBuild(args)
+	case "dev":
+		return RunDev(args)
 	case "help", "--help", "-h":
 		PrintHelp()
 		return nil
