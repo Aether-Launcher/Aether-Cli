@@ -1,6 +1,6 @@
 {
   "name": "@aethermc/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Official CLI toolkit for Aether Minecraft Launcher extensions and themes",
   "main": "bin/run.js",
   "bin": {

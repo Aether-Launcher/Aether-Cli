@@ -18,11 +18,12 @@ func RunInit(args []string) error {
 		}
 	}
 
+	bin := BinaryName()
 	if len(filteredArgs) < 2 {
 		if isTheme {
-			return fmt.Errorf("usage: aether-cli init --theme <theme-name> <theme-id>")
+			return fmt.Errorf("usage: %s init --theme <theme-name> <theme-id>", bin)
 		}
-		return fmt.Errorf("usage: aether-cli init <extension-name> <extension-id> [--theme]")
+		return fmt.Errorf("usage: %s init <extension-name> <extension-id> [--theme]", bin)
 	}
 
 	name := filteredArgs[0]
@@ -44,17 +45,17 @@ func RunInit(args []string) error {
 	if isTheme {
 		fmt.Printf("Initializing theme '%s' (%s)...\n", name, id)
 		if err := scaffold.CreateTheme(targetDir, name, id); err != nil {
-			return fmt.Errorf("❌ Failed to initialize theme: %w", err)
+			return fmt.Errorf("failed to initialize theme: %w", err)
 		}
-		fmt.Println("✅ Initialization complete!")
-		fmt.Printf("cd %s && aether-cli build --theme\n", name)
+		fmt.Println("Initialization complete.")
+		fmt.Printf("Next steps:\n  cd %s && %s build --theme\n", name, bin)
 	} else {
 		fmt.Printf("Initializing extension '%s' (%s)...\n", name, id)
 		if err := scaffold.CreateExtension(targetDir, name, id); err != nil {
-			return fmt.Errorf("❌ Failed to initialize extension: %w", err)
+			return fmt.Errorf("failed to initialize extension: %w", err)
 		}
-		fmt.Println("✅ Initialization complete!")
-		fmt.Printf("cd %s && aether-cli build\n", name)
+		fmt.Println("Initialization complete.")
+		fmt.Printf("Next steps:\n  cd %s && %s build\n", name, bin)
 	}
 	return nil
 }

@@ -37,30 +37,30 @@ func RunBuild(args []string) error {
 		fmt.Println("Validating theme...")
 		t, err := manifest.ValidateTheme(cwd)
 		if err != nil {
-			return fmt.Errorf("❌ Theme Validation Failed. Cannot build: %w", err)
+			return fmt.Errorf("theme validation failed: %w", err)
 		}
 
 		fmt.Printf("Packaging theme %s v%s...\n", t.Name, t.Version)
 		outPath, err := packager.BuildTheme(cwd, t)
 		if err != nil {
-			return fmt.Errorf("❌ Theme Build Failed: %w", err)
+			return fmt.Errorf("theme build failed: %w", err)
 		}
 
-		fmt.Printf("✅ Theme Build Successful: %s\n", outPath)
+		fmt.Printf("[OK] Theme build successful: %s\n", outPath)
 	} else {
 		fmt.Println("Validating extension...")
 		m, err := manifest.Validate(cwd)
 		if err != nil {
-			return fmt.Errorf("❌ Extension Validation Failed. Cannot build: %w", err)
+			return fmt.Errorf("extension validation failed: %w", err)
 		}
 
 		fmt.Printf("Packaging extension %s v%s...\n", m.Name, m.Version)
 		outPath, err := packager.Build(cwd, m)
 		if err != nil {
-			return fmt.Errorf("❌ Extension Build Failed: %w", err)
+			return fmt.Errorf("extension build failed: %w", err)
 		}
 
-		fmt.Printf("✅ Extension Build Successful: %s\n", outPath)
+		fmt.Printf("[OK] Extension build successful: %s\n", outPath)
 	}
 
 	return nil

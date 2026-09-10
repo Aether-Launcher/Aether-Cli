@@ -36,16 +36,16 @@ func RunValidate(args []string) error {
 		fmt.Println("Validating theme in:", cwd)
 		t, err := manifest.ValidateTheme(cwd)
 		if err != nil {
-			return fmt.Errorf("❌ Theme Validation Failed: %w", err)
+			return fmt.Errorf("theme validation failed: %w", err)
 		}
-		fmt.Printf("✅ Theme Validation Passed: %s (%s) v%s\n", t.Name, t.ID, t.Version)
+		fmt.Printf("[OK] Theme validation passed: %s (%s) v%s\n", t.Name, t.ID, t.Version)
 	} else {
 		fmt.Println("Validating extension in:", cwd)
 		m, err := manifest.Validate(cwd)
 		if err != nil {
-			return fmt.Errorf("❌ Extension Validation Failed: %w", err)
+			return fmt.Errorf("extension validation failed: %w", err)
 		}
-		fmt.Printf("✅ Extension Validation Passed: %s (%s) v%s\n", m.Name, m.ID, m.Version)
+		fmt.Printf("[OK] Extension validation passed: %s (%s) v%s\n", m.Name, m.ID, m.Version)
 	}
 
 	return nil

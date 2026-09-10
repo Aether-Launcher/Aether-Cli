@@ -25,31 +25,31 @@ func RunDev(args []string) error {
 	}
 
 	// 1. Validate Extension
-	fmt.Println("🔍 Validating extension...")
+	fmt.Println("Validating extension...")
 	m, err := manifest.Validate(cwd)
 	if err != nil {
-		return fmt.Errorf("❌ Extension validation failed: %w", err)
+		return fmt.Errorf("extension validation failed: %w", err)
 	}
 
 	// 2. Resolve Aether Local Extension Data Directory
 	destDir, err := getAetherExtensionDir(m.ID)
 	if err != nil {
-		return fmt.Errorf("❌ Could not locate Aether data directory: %w", err)
+		return fmt.Errorf("could not locate Aether data directory: %w", err)
 	}
 
 	fmt.Println("==================================================")
-	fmt.Printf("🚀 Aether Dev Mode Active\n")
-	fmt.Printf("📦 Extension: %s (id: %s, v%s)\n", m.Name, m.ID, m.Version)
-	fmt.Printf("📂 Source:    %s\n", cwd)
-	fmt.Printf("🎯 Target:    %s\n", destDir)
+	fmt.Println("[Aether] Dev Mode Active")
+	fmt.Printf("  Extension: %s (id: %s, v%s)\n", m.Name, m.ID, m.Version)
+	fmt.Printf("  Source:    %s\n", cwd)
+	fmt.Printf("  Target:    %s\n", destDir)
 	fmt.Println("==================================================")
 
 	// Initial Sync
 	if err := syncDirectory(cwd, destDir); err != nil {
-		return fmt.Errorf("❌ Failed initial sync to Aether: %w", err)
+		return fmt.Errorf("failed initial sync to Aether: %w", err)
 	}
-	fmt.Println("✅ Extension deployed into Aether Launcher!")
-	fmt.Println("👀 Watching for file changes... (Press Ctrl+C to stop)")
+	fmt.Println("[OK] Extension deployed into Aether Launcher.")
+	fmt.Println("Watching for file changes... (Press Ctrl+C to stop)")
 
 	// 3. File Watcher Loop
 	modTimes := make(map[string]time.Time)
@@ -64,17 +64,17 @@ func RunDev(args []string) error {
 	for {
 		select {
 		case <-sigChan:
-			fmt.Println("\n👋 Stopping dev mode watcher. Happy coding!")
+			fmt.Println("\nStopping dev mode watcher.")
 			return nil
 		case <-ticker.C:
 			changedFiles := checkModTimes(cwd, modTimes)
 			if len(changedFiles) > 0 {
 				nowStr := time.Now().Format("15:04:05")
-				fmt.Printf("[%s] 🔄 Changed: %v\n", nowStr, changedFiles[0])
+				fmt.Printf("[%s] Changed: %v\n", nowStr, changedFiles[0])
 				if err := syncDirectory(cwd, destDir); err != nil {
-					fmt.Printf("[%s] ⚠️ Sync error: %v\n", nowStr, err)
+					fmt.Printf("[%s] [Error] Sync error: %v\n", nowStr, err)
 				} else {
-					fmt.Printf("[%s] ✨ Extension updated in Aether!\n", nowStr)
+					fmt.Printf("[%s] [OK] Extension updated in Aether.\n", nowStr)
 				}
 			}
 		}
