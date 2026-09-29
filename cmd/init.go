@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/wayback09/aether-cli/pkg/scaffold"
+	"github.com/Aether-Launcher/aether-cli/pkg/scaffold"
 )
 
 func RunInit(args []string) error {

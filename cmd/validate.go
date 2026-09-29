@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/wayback09/aether-cli/pkg/manifest"
+	"github.com/Aether-Launcher/aether-cli/pkg/manifest"
 )
 
 func RunValidate(args []string) error {

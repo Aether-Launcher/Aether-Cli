@@ -5,8 +5,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/wayback09/aether-cli/pkg/manifest"
-	"github.com/wayback09/aether-cli/pkg/packager"
+	"github.com/Aether-Launcher/aether-cli/pkg/manifest"
+	"github.com/Aether-Launcher/aether-cli/pkg/packager"
 )
 
 func RunBuild(args []string) error {

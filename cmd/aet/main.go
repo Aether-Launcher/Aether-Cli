@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/wayback09/aether-cli/cmd"
+	"github.com/Aether-Launcher/aether-cli/cmd"
 )
 
 func main() {

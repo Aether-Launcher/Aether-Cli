@@ -1,3 +1,3 @@
-module github.com/wayback09/aether-cli
+module github.com/Aether-Launcher/aether-cli
 
 go 1.26.2

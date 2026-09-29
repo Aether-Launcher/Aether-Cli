@@ -8,7 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/wayback09/aether-cli/pkg/manifest"
+	"github.com/Aether-Launcher/aether-cli/pkg/manifest"
 )
 
 // Build packages the extension directory into an .aex zip archive.
